@@ -1,0 +1,337 @@
+command-name <options> <inputs>
+$ --> normal user
+# --> root user
+command-name --help or man command-name
+
+ls --> list subdirectories
+
+/home/ec2-user 
+
+cd --> change directory
+/ --> root directory
+
+ls
+ls -l -->lengthy format in alphabetic order
+drwxr-xr-x  15 root root 2900 Nov 28 01:53 dev
+d --> directory
+- --> file
+cd .. --> one step back
+ls -lr --> reverse alphabetic order
+ls -lt --> latest files are on the top
+ls -ltr --> old files are on the top
+ls -la --> list all files and folders including hidden
+
+CRUD
+--------------------
+create
+read
+update
+delete
+
+file create
+------------
+touch --> creates an empty file
+mkdir --> make directory
+
+update file with content
+-----------------------
+cat > <file-name> --> file will open
+enter the content
+enter and ctrl+d
+
+> --> replaces the content
+>> --> appends the content
+
+reading file
+-----------------------
+cat file-name
+
+remove file and folder
+----------------------
+rm <file-name> 
+rmdir <folder-name> --> removes empty directory
+rm -r devops --> recursive --> go inside every folder and delete everything
+
+
+copy
+----------------------
+cp <source> <destination>
+cp -r --> recursive
+
+cut
+----------------------
+mv --> move
+with in the same folder if you use mv command, it works as rename
+
+mv sivakumar sivakumar-1 --> this will rename the file from sivakumar sivakumar-1
+
+
+grep command
+----------------
+grep <word-to-find> <file-name>
+
+Linux is by default case sensitive
+Devops and DEVOPS are different
+
+| --> piping one command output will become input to another command
+
+wget vs curl
+---------------
+https://github.com/git-for-windows/git/releases/download/v2.43.0.windows.1/Git-2.43.0-64-bit.exe
+
+wget --> download files
+curl --> downloads the text content directly on to terminal
+
+cut and awk
+--------------
+https://github.com/daws-76s/notes/blob/master/session-01.txt
+
+delimiter --> we get fragments
+:
+/
+---
+https:
+
+github.com
+daws-76s
+
+cut -d / -f 1
+
+awk
+------
+awk -F / '{print $1F}'
+awk -F / '{print $NF}' --> last fragment
+
+awk command is used to divide the data based on columns
+
+uname
+ls
+cat
+cp
+mv
+grep
+cut
+awk
+head and tail
+
+head <file-name> --> first 10lines
+tail <file-name< --> last 10 lines
+
+Editors
+-------------
+vim --> visually improved
+
+vim <file-name>
+
+colon/command mode
+------------------
+:/<word-to-search> --> search from top
+:?<word-to-search> --> search from bottom
+
+sudo cp /etc/ssh/sshd_config sshd_config
+sudo chown ec2-user:ec2-user sshd_config
+
+replace the content/word
+-----------------------
+:s/<word-to-find>/<word-to-replace> --> replace the word where your cursor is, this will replace only first occurence in that line
+
+:2s/<word-to-find>/<word-to-replace>
+:%s/<word-to-find>/<word-to-replace>/g --> all occurences
+
+SDLC
+------
+Requirements
+Design
+Develop
+Test
+Deploy
+Maintain
+
+4-7
+
+head 7 | tail 3
+
+ssh-keygen -f 
+
+:wq!
+
+dd
+
+
+ls
+cat
+touch
+rm
+rmdir
+mkdir
+cut
+awk
+curl
+wget
+grep
+head
+tail
+vim editor
+cp
+mv
+
+permissions
+--------------
+- rw-	rw-    r--
+  user  group  others
+  u      g      o
+  
+R -> 4
+W -> 2
+X -> 1 -> to run commands and shell scripts
+
+sivakumar --> DevOps Team
+user=owner
+group=devops
+others=testing,development team
+
+in Linux when you create user, a group with same name will be created
+sivakumar --> user sivakumar and group with name sivakumar also created
+
+chmod u+x sample
+
+chmod ugo+r sample
+
+sample
+
+u --> RWX
+g --> R
+o -> 0
+740
+
+u --> RWX
+g --> RX
+o --> X
+
+751
+
+User management
+-------------------
+ramesh joined devops team
+
+1. create user
+useradd <user-name>
+passwd <user-name>
+
+/etc/passwd --> will have user entries
+when a user is created, automatically group is created with same username
+
+getent groups
+/etc/ssh/sshd_config --> enable password authentication
+sshd -t --> checks for syntax of the file
+systemctl restart sshd --> 
+
+2. group create
+
+groupadd <group-name>
+
+3. every user will have a primary group and secondary group
+
+ramesh should be added to devops group
+
+usermod -g devops ramesh
+
+chown --> even file owner can't run this commands
+only sudo user can change the ownership
+chown <user>:<group> file-name
+chown <user>:<group> -R folder
+
+4. we will create testing group, we will give ramesh secondary access to testing
+
+usermod -aG testing ramesh
+
+gpasswd -d ramesh testing --> deletes ramesh from testing group
+
+user is leaving organisation
+------------------------------
+userdel <user-name> --> removes user from linux
+
+first user should be removed from the group
+
+1. project release
+2. company release
+
+
+process management
+----------------------------
+if you follow process you will get best results
+
+everything in linux is a process...
+
+Team Leader
+Team Manager
+Account Manager
+Senior Engineer
+Junior Engineer
+Trainee
+
+Team Leader --> 1 ticket created about devops pipelines setup = 1
+
+Senior Engineer --> 1
+
+sub task -> 2 --> Junior Engineer
+sub task -> 3 --> Junior Engineer-2
+
+Junior Engineer - 2 
+---------------
+sub task --> 4 --> trainee
+create a CI pipeline --> task completed
+ticket 4 --> task completed
+
+task ID --> 4 , parent task --> 3
+task 3 --> task 1
+
+whatever we do in linux --> a process id will be created and reported back
+
+ps
+
+echo Hello --> print Hello task given to Linux
+
+I need to create a process ID
+2345 --> result is hand overed to bash terminal 3720
+
+foreground process --> block terminal
+background process --> runs in background &
+
+when process stucks we need to kill it
+
+kill PID --> process may or may not be terminated
+
+when process stuck even kill can't kill it
+
+kill -9 --> forcefully terminate
+
+nodejs project
+----------------
+
+ps -ef | grep nodejs
+
+
+package management
+-----------------------
+yum command is used to install packages --> RHEL = centos = fedora = AWS Linux 2
+amazon-linux-extras
+yum install package-name
+
+apt-get 
+raheem joined, how can you enable ssh accesss through private key
+------------------------------------------------------
+1. create raheem user
+2. give me your public key, keep your private key securely.
+
+700
+user --> RWX
+group 
+Others
+
+chown user:group <file-name>
+
+chmod o+r <file-name>
+
+https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.83/bin/apache-tomcat-9.0.83.zip
+https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.84/bin/apache-tomcat-9.0.83.zip

@@ -1,0 +1,44 @@
+LINUX::::
+
+
+Linux is not operating system --> it is kernel
+
+OS vs Kernel
+--------------
+Kernel --> connecting to Hardware --> no utilities, no shell
+
+Linus Torvalds --> Linux
+
+Unix --> very costly, tightly coupled to hardware
+
+Linux Kernel --> based on unix principles but code is from the scratch --> C Language
+
+Open source
+
+Kernel + package + shell == OS
+Android is flavour of linux
+Kernel + package + shell + UI
+
+ubuntu
+-------
+Desktop --> Kernel + Shell + UI
+Server --> Kernel + Shell
+centos
+RHEL
+Fedore
+Suse
+Arch Linux
+99% same --> few commands only will differ
+
+RHEL --> Open source --> but not free
+Code open source -> take the code
+
+Support --> immidiate call
+community 
+RHEL = Centos = Fedora = almalinux = AWS Linux
+
+RHEL --> Code --> OS --> CentOS --> internet community
+
+
+
+https://youtu.be/IeK-5bR_ZlQ?si=LqQe_jRCno4RZPek
