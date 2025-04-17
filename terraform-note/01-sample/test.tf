@@ -28,17 +28,14 @@ resource "google_compute_disk" "boot_disk" {
 
   image = "projects/centos-cloud/global/images/centos-stream-9-v20250415"
 
+  # Attach the snapshot schedule to the disk
+  resource_policies = [
+    "projects/co-bharatgpt-prod/regions/asia-south1/resourcePolicies/default-schedule-1"
+  ]
+
   labels = {
     my_label = "value"
   }
-}
-
-# Attach the existing snapshot schedule to the disk
-resource "google_compute_resource_policy_attachment" "snapshot_schedule_attachment" {
-  name            = "attach-snapshot-schedule"
-  disk            = google_compute_disk.boot_disk.name
-  zone            = google_compute_disk.boot_disk.zone
-  resource_policy = "projects/co-bharatgpt-prod/regions/asia-south1/resourcePolicies/default-schedule-1"
 }
 
 # Create the compute instance using the existing disk
@@ -75,7 +72,6 @@ resource "google_compute_instance" "default" {
 
   depends_on = [
     google_compute_address.static_ip,
-    google_compute_disk.boot_disk,
-    google_compute_resource_policy_attachment.snapshot_schedule_attachment
+    google_compute_disk.boot_disk
   ]
 }
