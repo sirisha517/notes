@@ -24,9 +24,11 @@ resource "google_compute_instance" "default" {
   }
 
   network_interface {
-    network = "co-vpc-host-prod-385510"
-    access_config {}
-  }
+  network    = "projects/co-vpc-host-prod-385510/global/networks/prod-base-vpc"
+  subnetwork = "projects/co-vpc-host-prod-385510/regions/asia-south1/subnetworks/sb-prod-shared-base-pub"
+  access_config {}  # Allows ephemeral public IP
+}
+
 
   service_account {
     email  = "gcp-vm-reader@co-bharatgpt-prod.iam.gserviceaccount.com"
