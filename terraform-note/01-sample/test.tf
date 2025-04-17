@@ -33,7 +33,7 @@ resource "google_compute_instance" "default" {
   }
 
   service_account {
-    email  = google_service_account.default.email
+    email  = "gcp-vm-reader@co-bharatgpt-prod.iam.gserviceaccount.com"
     scopes = ["cloud-platform"]
   }
 
