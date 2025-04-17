@@ -1,0 +1,21 @@
+0:00 - Welcome back
+3:52 - REDIRECTORS Redirecting the OUTPUT
+13:04 - start of Students Questions & Doubts
+17:58 - special file dev/null
+21:38 - end of Students Questions & Doubts
+24:30 - Code Best Standards
+26:15 - Code DRY with FUNCTIONS
+31:11 - Variables inside the Functions
+33:24 - Special Variables
+37:24 - Functions is all about keeping the code dry
+38:06 - start of Students Questions & Doubts
+55:49 - end of Students Questions & Doubts
+55:57 - Implementing
+59:36 - Common.sh
+1:01:20 - Ansible best practices DIRECTORY LAYOUT
+1:02:21 - Students Questions & Doubts
+1:12:06 - SED Stream Line Editor
+1:14:13 - SED Delete the Lines
+1:18:17 - SED Substitue the Word
+1:22:13 - SED Add the new Lines
+1:26:56 - That's all for today

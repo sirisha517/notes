@@ -1,0 +1,21 @@
+00:00 - Recalling yesterdays session
+02:30 - Hostinger
+05:00 - DNS Server
+07:10 - route 53
+23:30 - Route 53 cost: The price for which this service is availed 
+27:06 - Manual work: whatever we are doing now should be automated 
+29:29 - What we are automating 
+47:49 - Scripting (Automation)
+49:38 - Code standards 
+53:00 - IntelliJ setup (Code Editor)
+59:00 - GIT Bash setup
+01:09:59 - VCS(Version Control System)
+01:11:42 - GIT Server
+01:13:00 - GIT Resume
+1:20:00 - Creating GIT Repo
+1:25:00 - GIT credentials 
+1:29:00 - Questions
+
+:::::
+SHELL:::
+shell is default in os .no additional installation 

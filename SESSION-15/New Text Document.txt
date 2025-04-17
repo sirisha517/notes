@@ -1,0 +1,30 @@
+JIRA::::
+
+jira tracking tool
+
+==>we have board and tickets 
+==> - Welcome back
+1:52 - Recalling Last Session
+13:39 - Git Centralized Repo (IntelliJ)
+14:52 - Getting Information on the Server Side
+16:35 - Creating AWS-Server-Instance
+23:39 - What Happens in Agile
+24:41 - explaining JIRA
+29:58 - GIT Commit Messages
+34:45 - Shell Scripting
+38:49 - Which Shell
+39:16 - Why Bash
+40:05 - How the file name should look like
+46:13 - Installing extensions in IntelliJ along with detailed explanation
+51:40 - comment
+54:58 - how to execute shell script on server
+57:23 - creating repository in github for our project
+58:34 - Frontend.sh
+1:06:11 - Code standards
+1:16:27 - Creating Workstation server
+1:18:15 - IAM-AWS
+1:20:21 - aws configure credentials
+1:22:16 - using aws cli command
+1:23:03 - Creating all 11 Instances using shell script
+1:28:20 - Cancelling Spot Instances except-workstation
+1:29:09 - That's all for today

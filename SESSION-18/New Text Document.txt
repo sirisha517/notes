@@ -1,0 +1,18 @@
+0:00 - Welcome
+0:32 - Recaliong Last Session
+5:46 - Tell the STATUS Success or Fail 
+6:31 - Exit STATUS
+13:31 - Exit STATUS RANGE
+15:29 - TWO types of Conditions
+17:23 - IF Conditon is majorly used
+20:15 - Expressions
+21:51 - man bash
+28:59 - start of Students Questions & Doubts
+35:38 - end of Students Questions & Doubts
+38:45 - exit command
+51:34 - id command
+56:21 - start of Students Questions & Doubts
+1:00:30 - end of Students Questions & Doubts
+1:01:25 - Redis Component
+1:06:52 - User Component
+1:11:24 - That's all for today
