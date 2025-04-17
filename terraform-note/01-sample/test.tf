@@ -20,6 +20,7 @@ resource "google_compute_instance" "default" {
       image = "centos-stream-9-v20250415"
       size  = 30  # Disk size set to 30 GB
       type  = "pd-balanced"
+      disk_type = "pd-balanced"  # Explicitly setting disk type
       labels = {
         my_label = "value"
       }
