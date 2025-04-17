@@ -15,6 +15,16 @@ resource "google_compute_instance" "default" {
   machine_type = "e2-small"
   zone         = "asia-south1-b"
 
+# custom cpu and RAM
+# source "google_compute_instance" "default" {
+# name         = "my-instance"
+# machine_type = "custom" # Use custom machine type
+# 
+# # Define custom CPU and RAM
+# guest_cpu_count = 4  # 4 CPUs
+# memory          = 16  # 16 GB of RAM
+
+  zone         = "asia-south1-b"
   boot_disk {
   device_name = "my-instance"  # Set device name to match VM name
   initialize_params {
