@@ -35,6 +35,6 @@ and pull
 ==> terraform init 
 ==> check ls - A
 ==> terraform plan
-==> terraform apply
+==> terraform apply -auto-approve
 
 ==> terraform destroy -auto-approve
