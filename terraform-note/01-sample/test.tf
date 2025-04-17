@@ -12,7 +12,24 @@ resource "google_compute_address" "static_ip" {
   network_tier = "PREMIUM"
 }
 
-# Create boot disk (Balanced PD)
+# Create snapshot schedule
+resource "google_compute_resource_policy" "snapshot_schedule" {
+  name    = "default-schedule-1"
+  region  = "asia-south1"
+  project = "co-bharatgpt-prod"
+
+  snapshot_schedule {
+    on_source_disk_delete = "KEEP"
+    schedule {
+      daily {
+        hours   = 3
+        minutes = 0
+      }
+    }
+  }
+}
+
+# Create the boot disk (Balanced PD)
 resource "google_compute_disk" "boot_disk" {
   name  = "my-instance-boot-disk"
   type  = "pd-balanced"
@@ -21,7 +38,7 @@ resource "google_compute_disk" "boot_disk" {
   image = "centos-stream-9-v20250415"
 
   resource_policies = [
-    "projects/co-bharatgpt-prod/regions/asia-south1/resourcePolicies/default-schedule-1"
+    google_compute_resource_policy.snapshot_schedule.id
   ]
 }
 
