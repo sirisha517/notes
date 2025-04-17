@@ -33,5 +33,4 @@ resource "google_compute_instance" "default" {
     scopes = ["cloud-platform"]
   }
 
-  depends_on = [google_service_account.default]
 }
