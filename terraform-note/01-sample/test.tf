@@ -1,3 +1,9 @@
+provider "google" {
+  project = "co-bharatgpt-prod"
+  region  = "asia-south1"
+  zone    = "asia-south1-b"
+}
+
 resource "google_service_account" "default" {
   account_id   = "co-bharatgpt-prod"
   display_name = "Custom SA for VM Instance"
