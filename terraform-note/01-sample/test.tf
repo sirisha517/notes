@@ -8,7 +8,6 @@ resource "google_compute_instance" "default" {
   machine_type = "e2-small"
   zone         = "asia-south1-b"
 
-
   boot_disk {
     initialize_params {
       image = "centos-stream-9-v20250415"
@@ -18,23 +17,19 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  // Local SSD disk
   scratch_disk {
     interface = "NVME"
   }
 
   network_interface {
     network = "sb-prod-shared-base-pub"
-
-    access_config {
-      // Ephemeral public IP
-    }
+    access_config {}
   }
 
-  
   service_account {
-    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = gcp-vm-reader@co-bharatgpt-prod.iam.gserviceaccount.com
+    email  = google_service_account.default.email
     scopes = ["cloud-platform"]
   }
+
+  depends_on = [google_service_account.default]
 }
