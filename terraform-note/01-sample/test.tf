@@ -13,7 +13,6 @@ resource "google_compute_address" "static_ip" {
 resource "google_compute_instance" "default" {
   name         = "my-instance"
   machine_type = "e2-small"
-  zone         = "asia-south1-a"
 
 # custom cpu and RAM
 # source "google_compute_instance" "default" {
