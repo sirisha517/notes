@@ -21,3 +21,20 @@
 
 
 
+INSTALL::::
+
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+sudo yum -y install terraform
+
+
+code in visual studio 
+and pull
+
+==> in server 
+==> terraform init 
+==> check ls - A
+==> terraform plan
+==> terraform apply
+
+==> terraform destroy -auto-approve
