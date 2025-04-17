@@ -17,22 +17,20 @@ resource "google_compute_instance" "default" {
   zone         = "asia-south1-b"
 
   boot_disk {
-    initialize_params {
-      image = "ubuntu-minimal-2404-noble-amd64-v20240808"
-      size  = 30
-      type  = "pd-balanced" # Balanced Persistent Disk
-      labels = {
-        my_label = "value"
-      }
+  initialize_params {
+    image = "centos-stream-9-v20250415"
+    size  = 30
+    type  = "pd-balanced"
+    labels = {
+      my_label = "value"
     }
-
-    auto_delete = true
-
-    # Attach existing snapshot schedule
-    resource_policies = [
-      "projects/co-bharatgpt-prod/regions/asia-south1/resourcePolicies/default-schedule-1"
-    ]
   }
+
+  resource_policies = [
+    "projects/co-bharatgpt-prod/regions/asia-south1/resourcePolicies/default-schedule-1"
+  ]
+}
+
 
   network_interface {
     network    = "projects/co-vpc-host-prod-385510/global/networks/prod-base-vpc"
