@@ -19,9 +19,7 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  scratch_disk {
-    interface = "NVME"
-  }
+  
 
   network_interface {
   network    = "projects/co-vpc-host-prod-385510/global/networks/prod-base-vpc"
