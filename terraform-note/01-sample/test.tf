@@ -4,38 +4,42 @@ provider "google" {
   zone    = "asia-south1-b"
 }
 
-# Static IP
+# Reserve a static IP
 resource "google_compute_address" "static_ip" {
   name   = "my-static-ip"
   region = "asia-south1"
 }
 
-# Create a separate disk with snapshot schedule attached
+# Create the boot disk with CentOS 9 Stream and 30GB pd-balanced type
 resource "google_compute_disk" "boot_disk" {
   name  = "my-instance-boot-disk"
   type  = "pd-balanced"
   zone  = "asia-south1-b"
   size  = 30
 
-  image = "centos-stream-9-v20250415"
+  image = "projects/centos-cloud/global/images/centos-stream-9-v20250415"
 
   labels = {
     my_label = "value"
   }
-
-  # Attach the existing snapshot schedule
-  resource_policies = [
-    "projects/co-bharatgpt-prod/regions/asia-south1/resourcePolicies/default-schedule-1"
-  ]
 }
 
-# Create the instance using that disk
+# Attach the existing snapshot schedule to the disk
+resource "google_compute_resource_policy_attachment" "snapshot_schedule_attachment" {
+  name            = "attach-snapshot-schedule"
+  disk            = google_compute_disk.boot_disk.name
+  zone            = google_compute_disk.boot_disk.zone
+  resource_policy = "projects/co-bharatgpt-prod/regions/asia-south1/resourcePolicies/default-schedule-1"
+}
+
+# Create the compute instance using the existing disk
 resource "google_compute_instance" "default" {
   name         = "my-instance"
   machine_type = "e2-small"
   zone         = "asia-south1-b"
 
   boot_disk {
+    device_name = "my-instance"
     source      = google_compute_disk.boot_disk.id
     auto_delete = true
   }
@@ -51,7 +55,6 @@ resource "google_compute_instance" "default" {
 
   metadata_startup_script = <<-EOF
     #!/bin/bash
-    # Install Google Cloud Ops Agent
     curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
     sudo bash add-google-cloud-ops-agent-repo.sh --also-install
   EOF
@@ -61,5 +64,9 @@ resource "google_compute_instance" "default" {
     scopes = ["cloud-platform"]
   }
 
-  depends_on = [google_compute_address.static_ip, google_compute_disk.boot_disk]
+  depends_on = [
+    google_compute_address.static_ip,
+    google_compute_disk.boot_disk,
+    google_compute_resource_policy_attachment.snapshot_schedule_attachment
+  ]
 }
