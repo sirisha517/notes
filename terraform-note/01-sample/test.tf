@@ -24,7 +24,7 @@ resource "google_compute_instance" "default" {
   }
 
   network_interface {
-    network = "sb-prod-shared-base-pub"
+    network = "co-vpc-host-prod-385510"
     access_config {}
   }
 
