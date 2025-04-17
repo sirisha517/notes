@@ -19,7 +19,7 @@ resource "google_compute_instance" "default" {
     initialize_params {
       image = "centos-stream-9-v20250415"
       size  = 30  # Disk size set to 30 GB
-      type  = "pd-ssd"
+      type  = "pd-balanced"
       labels = {
         my_label = "value"
       }
