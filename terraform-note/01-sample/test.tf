@@ -16,6 +16,7 @@ resource "google_compute_instance" "default" {
   zone         = "asia-south1-b"
 
   boot_disk {
+  device_name = "my-instance"  # Set device name to match VM name
   initialize_params {
     image = "centos-stream-9-v20250415"
     size  = 30  # Disk size set to 30 GB
@@ -26,6 +27,10 @@ resource "google_compute_instance" "default" {
   }
 }
 
+# 🛡️ Attach existing snapshot schedule for data protection
+  resource_policies = [
+    "projects/co-bharatgpt-prod/regions/asia-south1/resourcePolicies/default-schedule-1"
+  ]
 
   network_interface {
     network    = "projects/co-vpc-host-prod-385510/global/networks/prod-base-vpc"
