@@ -16,16 +16,16 @@ resource "google_compute_instance" "default" {
   zone         = "asia-south1-b"
 
   boot_disk {
-    initialize_params {
-      image = "centos-stream-9-v20250415"
-      size  = 30  # Disk size set to 30 GB
-      type  = "pd-balanced"
-      disk_type = "pd-balanced"  # Explicitly setting disk type
-      labels = {
-        my_label = "value"
-      }
+  initialize_params {
+    image = "centos-stream-9-v20250415"
+    size  = 30  # Disk size set to 30 GB
+    type  = "pd-balanced"  # Balanced persistent disk
+    labels = {
+      my_label = "value"
     }
   }
+}
+
 
   network_interface {
     network    = "projects/co-vpc-host-prod-385510/global/networks/prod-base-vpc"
