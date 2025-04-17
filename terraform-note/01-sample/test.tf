@@ -4,33 +4,41 @@ provider "google" {
   zone    = "asia-south1-b"
 }
 
-# Reserve a static IP
+# Static IP
 resource "google_compute_address" "static_ip" {
   name   = "my-static-ip"
   region = "asia-south1"
 }
 
+# Create a separate disk with snapshot schedule attached
+resource "google_compute_disk" "boot_disk" {
+  name  = "my-instance-boot-disk"
+  type  = "pd-balanced"
+  zone  = "asia-south1-b"
+  size  = 30
+
+  image = "centos-stream-9-v20250415"
+
+  labels = {
+    my_label = "value"
+  }
+
+  # Attach the existing snapshot schedule
+  resource_policies = [
+    "projects/co-bharatgpt-prod/regions/asia-south1/resourcePolicies/default-schedule-1"
+  ]
+}
+
+# Create the instance using that disk
 resource "google_compute_instance" "default" {
   name         = "my-instance"
   machine_type = "e2-small"
   zone         = "asia-south1-b"
 
   boot_disk {
-  device_name = "my-instance"  # Set device name to match VM name
-  initialize_params {
-    image = "centos-stream-9-v20250415"
-    size  = 30  # Disk size set to 30 GB
-    type  = "pd-balanced"  # Balanced persistent disk
-    labels = {
-      my_label = "value"
-    }
+    source      = google_compute_disk.boot_disk.id
+    auto_delete = true
   }
-}
-
-# 🛡️ Attach existing snapshot schedule for data protection
-  resource_policies = [
-    "projects/co-bharatgpt-prod/regions/asia-south1/resourcePolicies/default-schedule-1"
-  ]
 
   network_interface {
     network    = "projects/co-vpc-host-prod-385510/global/networks/prod-base-vpc"
@@ -53,5 +61,5 @@ resource "google_compute_instance" "default" {
     scopes = ["cloud-platform"]
   }
 
-  depends_on = [google_compute_address.static_ip]
+  depends_on = [google_compute_address.static_ip, google_compute_disk.boot_disk]
 }
