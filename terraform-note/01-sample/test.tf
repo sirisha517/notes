@@ -4,7 +4,7 @@ provider "google" {
   zone    = "asia-south1-b"
 }
 
-# Static IP with PREMIUM network tier
+# Reserve a static external IP
 resource "google_compute_address" "static_ip" {
   name         = "my-static-ip"
   region       = "asia-south1"
@@ -12,20 +12,24 @@ resource "google_compute_address" "static_ip" {
   network_tier = "PREMIUM"
 }
 
-# Boot Disk with Snapshot Schedule
+# Create boot disk (Balanced PD)
 resource "google_compute_disk" "boot_disk" {
   name  = "my-instance-boot-disk"
   type  = "pd-balanced"
   zone  = "asia-south1-b"
   size  = 30
   image = "centos-stream-9-v20250415"
-
-  resource_policies = [
-    "projects/co-bharatgpt-prod/regions/asia-south1/resourcePolicies/default-schedule-1"
-  ]
 }
 
-# VM Instance with custom disk and IP
+# Attach snapshot schedule using separate resource
+resource "google_compute_resource_policy_attachment" "snapshot_schedule" {
+  name           = "attach-snapshot-policy"
+  disk           = google_compute_disk.boot_disk.name
+  zone           = google_compute_disk.boot_disk.zone
+  resource_policy = "projects/co-bharatgpt-prod/regions/asia-south1/resourcePolicies/default-schedule-1"
+}
+
+# Create VM instance
 resource "google_compute_instance" "default" {
   name         = "my-instance"
   machine_type = "e2-small"
@@ -55,4 +59,6 @@ resource "google_compute_instance" "default" {
     curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
     bash add-google-cloud-ops-agent-repo.sh --also-install
   EOT
+
+  depends_on = [google_compute_resource_policy_attachment.snapshot_schedule]
 }
