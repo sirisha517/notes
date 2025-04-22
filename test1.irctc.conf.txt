@@ -1,0 +1,78 @@
+server {
+    server_name test1.irctc.corover.ai;
+    location / {
+        root /usr/share/nginx/test1/;
+        index index.html;
+        try_files $uri /index.html;
+    }
+
+    location /eticket {
+        root /usr/share/nginx/html/test1/;
+        index index.html;
+        try_files $uri /index.html;
+    }
+
+    location /dishaAPI {
+        proxy_pass http://localhost:8087;
+        proxy_buffering off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port $server_port;
+    }
+location /clientAPI/ {
+        proxy_pass http://localhost:9018/;
+        proxy_buffering off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port $server_port;
+    }
+location /DMRCAPI/ {
+        proxy_pass http://localhost:9090/;
+        proxy_buffering off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port $server_port;
+    }
+    location /widget/ {
+        proxy_pass http://localhost:86/widget/;
+        proxy_buffering off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port $server_port;
+    }
+
+
+
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/test1.irctc.corover.ai/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/test1.irctc.corover.ai/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = test1.irctc.corover.ai) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    server_name test1.irctc.corover.ai;
+    listen 80;
+    return 404; # managed by Certbot
+
+
+}
+server {
+    if ($host = test1.irctc.corover.ai) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    server_name test1.irctc.corover.ai;
+    listen 80;
+    return 404; # managed by Certbot
+
+
+}
